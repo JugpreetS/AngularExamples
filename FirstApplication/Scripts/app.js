@@ -56,6 +56,10 @@ myApp.factory('firstFactory', function($http){
 		{'Name' : 'Ron', 'City' : 'London', 'Country' : 'UK'}
 	];
 
+	firstFactory.returnCustomers= function(){
+		return cust;
+	}
+
 	return firstFactory;
 
 });
@@ -71,10 +75,12 @@ myApp.controller('firstController', function($scope, $http, firstFactory){
 	// result.success(function(response){
 	// 	$scope.customers = response.records;
 	// });
-	$scope.customers = firstFactory.getCustomers();
-	firstFactory.getCustomers().then(function(result){
-		$scope.customers = result;
-	});
+	// $scope.customers = firstFactory.getCustomers();
+	// firstFactory.getCustomers().then(function(result){
+	// 	$scope.customers = result;
+	// });
+
+	$scope.customers = firstFactory.returnCustomers();
 
 	$scope.addCustomer = function(){
 		$scope.customers.push({'Name': $scope.newCustomer.name, 'City' : $scope.newCustomer.city, 'Country' : $scope.newCustomer.country});
